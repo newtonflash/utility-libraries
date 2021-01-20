@@ -1,8 +1,10 @@
 # utility-libraries
 
-| file name | details |
-| --- | ---|
-|mem-cache | creates a cache that accepts objects as keys and stores anything init. It has a specific limit after which it removes in LIFO manner. ### How to use
+## mem-cache 
+
+creates a cache that accepts objects as keys and stores anything init. It has a specific limit after which it removes in LIFO manner. 
+
+### How to use
 var memcache = new MemCache();
 /**
 memcache.addCache({a:3, b:4}, {asdf:4});
