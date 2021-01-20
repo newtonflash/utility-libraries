@@ -5,6 +5,7 @@
 export default class MemCache {
     constructor(cacheSize = 200) {
         this._cache = new Map();
+        this._cacheCounter = [];
         this._cacheSize = cacheSize;
     }
 
@@ -45,14 +46,16 @@ export default class MemCache {
                 this._cache.set(encKey, value);
                 return true;
             }
-
-            this._cache.set(encKey, value);
-
-            if (this._cache.size > this._cacheSize) {
-                let entries = this._cache.entries();
-
-                this._cache.delete(entries.next().value[0]);
+            
+            this._cacheCounter.push(encKey);
+            
+            if(this._cacheCounter.length > this._cacheSize){
+                let toDelKey = this._cacheCounter[0];
+                this._cache.delete(toDelKey);
+                this._cacheCounter.shift();
             }
+            
+            this._cache.set(encKey, value);
 
             return true;
         }
